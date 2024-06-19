@@ -197,7 +197,7 @@ Yêu cầu<p>
   •	Báo cáo tình trạng hàng trong kho, số hàng tồn, số hàng đã hết chưa nhập về.<p>
 Xây dựng<p>
  
--- thêm sản phẩm
+<code> -- thêm sản phẩm
 CREATE PROCEDURE themsanpham
     @MaSanPham NVARCHAR(255),
 	@TenSanPham NVARCHAR(250),
