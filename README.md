@@ -1,4 +1,4 @@
-![image](https://github.com/lazy1st/B-i-t-p-L-N-CSDL/assets/166302644/1622c44a-48e5-43d7-9556-0693901a6ace)# CHƯƠNG TRÌNH QUẢN LÝ KHO VÀ BÁN CỦA CỬA HÀNG CÀ PHÊ HIỀN ANH
+# CHƯƠNG TRÌNH QUẢN LÝ KHO VÀ BÁN CỦA CỬA HÀNG CÀ PHÊ HIỀN ANH
 ***
 **Tác Giả: Hoàng Đức Thuần**
 
@@ -40,7 +40,7 @@ Nhập xuất và báo cáo các thông tin liên quan đến kho và việc bá
 6.	Giao Dịch kho: 🔑Mã giao dịch, mã sản phẩm, số lượng, ngày nhập kho, ngày xuất kho.<p>
 Như vậy, dựa theo những thông tin mà ta đã thu thập được chúng ta sẽ xây dựng các bảng đáp ứng yêu cầu quản lý của của hàng.
 ---
-### Tạo các bảng như mô tả trong SQL Sever:<p>
+## Tạo các bảng như mô tả trong SQL Sever:<p>
 1.Bảng Sản Phẩm<p>
 ![image](https://github.com/lazy1st/B-i-t-p-L-N-CSDL/assets/166302644/e5740186-0416-4e70-96da-0527f341431f)
 
@@ -108,7 +108,7 @@ Tạo sơ đồ thực thể liên kết giữa các bảng :<p>
 
 Thêm dữ liệu vào các bảng<p>
 1.	Dữ liệu thêm vào bảng SanPham<p>
-######-- Chèn dữ liệu vào bảng Danh mục sản phẩm<p>
+-- Chèn dữ liệu vào bảng Danh mục sản phẩm<p>
 INSERT INTO DanhMucSanPham (MaDanhMuc, TenDanhMuc, GhiChu)<p>
 VALUES<p>
     '('muc1', 'Cà Phê Đen', ''),<p>
@@ -197,7 +197,7 @@ Yêu cầu<p>
   •	Báo cáo tình trạng hàng trong kho, số hàng tồn, số hàng đã hết chưa nhập về.<p>
 Xây dựng<p>
  
-######-- thêm sản phẩm
+-- thêm sản phẩm
 CREATE PROCEDURE themsanpham
     @MaSanPham NVARCHAR(255),
 	@TenSanPham NVARCHAR(250),
@@ -208,7 +208,7 @@ CREATE PROCEDURE themsanpham
 BEGIN
     SET NOCOUNT ON;
 
-    ######-- Kiểm tra xem sản phẩm có tồn tại hay không trước khi chèn
+ -- Kiểm tra xem sản phẩm có tồn tại hay không trước khi chèn
     IF NOT EXISTS (SELECT 1 FROM SanPham WHERE TenSanPham = @TenSanPham)
     BEGIN
         INSERT INTO SanPham (MaSanPham,TenSanPham, Gia ,MoTa, MaDanhMuc )
@@ -222,7 +222,7 @@ BEGIN
 END;
 GO
 
-######--thêm sản phẩm <p>
+--thêm sản phẩm <p>
 EXEC themsanpham
     @MaSanPham = 'M06',
     @TenSanPham = N'Cà Phê Sữa Đá',
@@ -237,16 +237,16 @@ AS
 BEGIN
     SET NOCOUNT ON;
 
-   ######-- Kiểm tra sản phẩm có tồn tại trong bảng SanPham không
+-- Kiểm tra sản phẩm có tồn tại trong bảng SanPham không
     IF EXISTS (SELECT 1 FROM SanPham WHERE MaSanPham = @MaSanPham)
     BEGIN
-        ######-- Xóa các bản ghi liên quan trong bảng DonHang trước (nếu cần)
+  -- Xóa các bản ghi liên quan trong bảng DonHang trước (nếu cần)
         DELETE FROM DonHang WHERE MaSanPham = @MaSanPham;
 
-       ###### -- Xóa các bản ghi liên quan trong bảng GiaoDichKho trước (nếu cần)
+     -- Xóa các bản ghi liên quan trong bảng GiaoDichKho trước (nếu cần)
         DELETE FROM GiaoDichKho WHERE MaSanPham = @MaSanPham;
 
-       ###### -- Xóa sản phẩm khỏi bảng SanPham
+    -- Xóa sản phẩm khỏi bảng SanPham
         DELETE FROM SanPham WHERE MaSanPham = @MaSanPham;
 
         SELECT 'Xóa sản phẩm thành công' AS [Result];
@@ -270,10 +270,10 @@ AS
 BEGIN
     SET NOCOUNT ON;
 
-   ######-- Kiểm tra sản phẩm có tồn tại trong bảng SanPham không
+-- Kiểm tra sản phẩm có tồn tại trong bảng SanPham không
     IF EXISTS (SELECT 1 FROM SanPham WHERE MaSanPham = @MaSanPham)
     BEGIN
-       ###### -- Cập nhật thông tin sản phẩm
+    -- Cập nhật thông tin sản phẩm
         UPDATE SanPham
         SET 
             TenSanPham = ISNULL(@TenSanPham, TenSanPham),
@@ -297,7 +297,7 @@ EXEC CapNhatSanPham
     @Gia = 16000,
     @MoTa = N'Cà Phê Đen Đá',
     @MaDanhMuc = 'muc1';
-######-- tìm kiếm sản phẩm 
+-- tìm kiếm sản phẩm 
  
 CREATE PROCEDURE TimKiemSanPham
     @MaSanPham NVARCHAR(50) = NULL,
@@ -317,7 +317,7 @@ END;
 GO<p>
 EXEC TimKiemSanPham @MaSanPham = 'M01';
  
-######--Tính tổng doanh thu của ngày được chỉ định
+ --Tính tổng doanh thu của ngày được chỉ định
 USE BTLSQL;
 GO
 
@@ -327,7 +327,7 @@ AS
 BEGIN
     SET NOCOUNT ON;
 
-    ######-- Hàm Tính tổng doanh thu của ngày được chỉ định
+-- Hàm Tính tổng doanh thu của ngày được chỉ định
     SELECT SUM(TongTien) AS DoanhThu
     FROM DonHang
     WHERE NgayBanHang = @NgayBanHang;
@@ -335,21 +335,21 @@ END;
 GO 
 EXEC TinhDoanhThuNgay @NgayBanHang = '2024-06-21'; 
  
-######-- Sản phẩm bán chạy nhất tháng
+-- Sản phẩm bán chạy nhất tháng
 
 CREATE PROCEDURE SanPhamBanChayNhatoTrongThang
     @Thang INT,
     @Nam INT
 AS
 BEGIN
-    SET NOCOUNT ON; ######-- Tắt thông báo số bản ghi bị ảnh hưởng
+    SET NOCOUNT ON; -- Tắt thông báo số bản ghi bị ảnh hưởng
 
-   ######-- Khai báo biến để lưu ngày bắt đầu và ngày kết thúc của tháng cần thống kê
+ -- Khai báo biến để lưu ngày bắt đầu và ngày kết thúc của tháng cần thống kê
     DECLARE @StartDate DATE, @EndDate DATE;
-    SET @StartDate = DATEFROMPARTS(@Nam, @Thang, 1);###### -- Ngày đầu tiên của tháng
-    SET @EndDate = DATEADD(DAY, -1, DATEADD(MONTH, 1, @StartDate));###### -- Ngày cuối cùng của tháng
+    SET @StartDate = DATEFROMPARTS(@Nam, @Thang, 1); -- Ngày đầu tiên của tháng
+    SET @EndDate = DATEADD(DAY, -1, DATEADD(MONTH, 1, @StartDate)); -- Ngày cuối cùng của tháng
 
-   ######-- Sử dụng CTE để tính tổng số lượng sản phẩm bán ra và lấy sản phẩm bán chạy nhất
+ -- Sử dụng CTE để tính tổng số lượng sản phẩm bán ra và lấy sản phẩm bán chạy nhất
     WITH BanChayNhat AS (
         SELECT TOP 1
             DH.MaSanPham,
@@ -359,7 +359,7 @@ BEGIN
         GROUP BY DH.MaSanPham 
         ORDER BY SUM(DH.SoLuong) DESC -- Sắp xếp giảm dần theo tổng số lượng bán
     )
-   ######-- Truy vấn để lấy thông tin chi tiết của sản phẩm bán chạy nhất
+-- Truy vấn để lấy thông tin chi tiết của sản phẩm bán chạy nhất
     SELECT 
         BC.MaSanPham, 
         SP.TenSanPham, 
@@ -367,11 +367,11 @@ BEGIN
         SP.MoTa,
         BC.TongSoLuongBan 
     FROM BanChayNhat BC
-    INNER JOIN SanPham SP ON BC.MaSanPham = SP.MaSanPham;###### -- Liên kết với bảng SanPham để lấy thông tin chi tiết
+    INNER JOIN SanPham SP ON BC.MaSanPham = SP.MaSanPham;-- Liên kết với bảng SanPham để lấy thông tin chi tiết
 END;
 GO 
  
-######- Tạo stored procedure ThongKeSoLuongHangTrongKho
+- Tạo stored procedure ThongKeSoLuongHangTrongKho
 CREATE PROCEDURE ThongKeSoLuongHangTrongKho
 AS
 BEGIN
@@ -392,7 +392,7 @@ BEGIN
 END;
 GO
 
-######-- Tạo trigger để cập nhật số lượng tồn kho khi có thay đổi trong bảng GiaoDichKho
+-- Tạo trigger để cập nhật số lượng tồn kho khi có thay đổi trong bảng GiaoDichKho
 CREATE TRIGGER trg_UpdateInventory
 ON GiaoDichKho
 AFTER INSERT, UPDATE, DELETE
@@ -402,7 +402,7 @@ BEGIN
 
     DECLARE @MaSanPham INT;
 
-   ######-- Con trỏ để xử lý các bản ghi bị ảnh hưởng
+-- Con trỏ để xử lý các bản ghi bị ảnh hưởng
     DECLARE cur CURSOR FOR
     SELECT DISTINCT MaSanPham FROM (
         SELECT MaSanPham FROM inserted
@@ -416,7 +416,7 @@ BEGIN
 
     WHILE @@FETCH_STATUS = 0
     BEGIN
-      ######  -- Cập nhật số lượng tồn kho cho sản phẩm hiện tại
+    -- Cập nhật số lượng tồn kho cho sản phẩm hiện tại
         UPDATE SanPham
         SET TongSoLuongTon = 
             (SELECT ISNULL(SUM(GDK.SoLuong), 0)
