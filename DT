@@ -1,0 +1,384 @@
+	-- Tạo Database
+CREATE DATABASE BTLSQL;
+GO
+
+	-- Sử dụng database vừa tạo
+USE BTLSQL;
+GO
+
+	-- Tạo bảng Danh mục sản phẩm
+CREATE TABLE DanhMucSanPham (
+    MaDanhMuc NVARCHAR(50) PRIMARY KEY,
+    TenDanhMuc VARCHAR(255) NOT NULL,
+    GhiChu TEXT
+);
+
+	-- Tạo bảng Sản phẩm
+CREATE TABLE SanPham (
+    MaSanPham NVARCHAR(50) PRIMARY KEY,
+    TenSanPham VARCHAR(255) NOT NULL,
+    Gia DECIMAL(10, 2) NOT NULL,
+    MoTa TEXT,
+    MaDanhMuc NVARCHAR(50),
+    FOREIGN KEY (MaDanhMuc) REFERENCES DanhMucSanPham(MaDanhMuc)
+);
+
+	-- Tạo bảng Khách hàng
+CREATE TABLE KhachHang (
+    MaKhachHang NVARCHAR(50) PRIMARY KEY,
+    TenKhachHang VARCHAR(255) NOT NULL,
+    SoDienThoai VARCHAR(15) NOT NULL,
+    DiaChi VARCHAR(255) NOT NULL,
+    LoaiKhachHang VARCHAR(50)
+);
+
+	-- Tạo bảng Đơn hàng
+CREATE TABLE DonHang (
+    MaDonHang NVARCHAR(50) PRIMARY KEY,
+    MaKhachHang NVARCHAR(50),
+    NgayBanHang DATE NOT NULL,
+    TongTien DECIMAL(10, 2) NOT NULL,
+    MaSanPham NVARCHAR(50),
+    SoLuong INT NOT NULL,
+    Gia DECIMAL(10, 2) NOT NULL,
+    GhiChu TEXT,
+    FOREIGN KEY (MaKhachHang) REFERENCES KhachHang(MaKhachHang),
+    FOREIGN KEY (MaSanPham) REFERENCES SanPham(MaSanPham)
+);
+
+	-- Tạo bảng Nhà cung cấp
+CREATE TABLE NhaCungCap (
+    MaNhaCungCap NVARCHAR(50) PRIMARY KEY,
+    TenNhaCungCap VARCHAR(255) NOT NULL,
+    SoDienThoaiNhaCungCap VARCHAR(15) NOT NULL,
+    TenNguoiLienHe VARCHAR(255) NOT NULL,
+    SoDienThoaiNguoiLienHe VARCHAR(15) NOT NULL,
+    DiaChi VARCHAR(255) NOT NULL
+);
+
+	-- Tạo bảng Giao Dịch kho
+CREATE TABLE GiaoDichKho (
+    MaGiaoDich NVARCHAR(50) PRIMARY KEY,
+    MaSanPham NVARCHAR(50),
+    SoLuong INT NOT NULL,
+    NgayNhapKho DATE,
+    NgayXuatKho DATE,
+    MaNhaCungCap NVARCHAR(50),
+    FOREIGN KEY (MaSanPham) REFERENCES SanPham(MaSanPham),
+    FOREIGN KEY (MaNhaCungCap) REFERENCES NhaCungCap(MaNhaCungCap)
+);
+
+USE BTLSQL;
+GO
+	-- Chèn dữ liệu vào bảng Danh mục sản phẩm
+INSERT INTO DanhMucSanPham (MaDanhMuc, TenDanhMuc, GhiChu)
+VALUES
+    ('muc1', 'Cà Phê Đen', ''),
+    ('muc2', 'Cà Phê Sữa', ''),
+    ('muc3', 'Cà Phê Phin', ''),
+    ('muc4', 'Cà Phê Capuchino', ''),
+    ('muc5', 'Cà Phê Trứng', '');
+
+USE BTLSQL;
+GO
+	-- Chèn dữ liệu vào bảng Sản phẩm
+INSERT INTO SanPham (MaSanPham, TenSanPham, Gia, MoTa, MaDanhMuc)
+VALUES
+    ('M01', 'Cà Phê Đen',  15000,'Cà Phê Đen', 'muc1'),
+    ('M02', 'Cà Phê Sữa' , 20000, 'Cà Phê Sữa', 'muc1'),
+    ('M03', 'Cà Phê Phin' , 15000, 'Cà Phê Phin' , 'muc2'),
+    ('M04', 'Cà Phê Capuchino' , 20000,'Cà Phê Capuchino' , 'muc3'),
+    ('M05', 'Cà Phê Trứng' , 25000,'Cà Phê Trứng' , 'muc4');
+
+	-- Chèn dữ liệu vào bảng Khách hàng
+INSERT INTO KhachHang (MaKhachHang, TenKhachHang, SoDienThoai, DiaChi, LoaiKhachHang)
+VALUES
+    ('KH001', 'Nguyen Van A', '0912345678', '123 Le Loi, TP.HCM', 'VIPP'),
+    ('KH002', 'Tran Thi B', '0987654321', '456 Hai Ba Trung, Ha Noi', 'VIP'),
+    ('KH003', 'Le Van C', '0909123456', '789 Nguyen Trai, Da Nang', 'New'),
+    ('KH004', 'Pham Thi D', '0934567890', '321 Tran Hung Dao, Can Tho', 'VIPP'),
+    ('KH005', 'Hoang Van E', '0976543210', '654 Le Duan, Hue', 'VIP');
+
+-- Chèn dữ liệu vào bảng Đơn Hàng
+INSERT INTO DonHang (MaDonHang, MaKhachHang, NgayBanHang, TongTien, MaSanPham, SoLuong, Gia, GhiChu)
+VALUES
+    ('DH001', 'KH001', '2024-06-19', 30000, 'M01', 2, 15000, 'Uống lạnh'),
+    ('DH002', 'KH002', '2024-06-20', 40000, 'M02', 2, 20000, 'Uống nóng'),
+    ('DH003', 'KH003', '2024-06-21', 30000, 'M03', 2, 15000, 'Không đá'),
+    ('DH004', 'KH004', '2024-06-22', 40000, 'M04', 2, 20000, 'Mang đi'),
+    ('DH005', 'KH005', '2024-06-23', 50000, 'M05', 2, 25000, '');
+
+	-- Chèn dữ liệu vào bảng Nha Cung Cấp
+INSERT INTO NhaCungCap (MaNhaCungCap, TenNhaCungCap, SoDienThoaiNhaCungCap, TenNguoiLienHe, SoDienThoaiNguoiLienHe, DiaChi)
+VALUES
+    ('NCC01', 'Nhà Cung Cấp Phúc Long', '0903456789', 'Nguyễn Văn Long', '0912345678', '12 Trần Hưng Đạo, Hoàn Kiếm, Hà Nội'),
+    ('NCC02', 'Nhà Cung Cấp Trung Nguyên', '0909876543', 'Trần Thị Trung', '0918765432', '34 Lý Thái Tổ, Hoàn Kiếm, Hà Nội'),
+    ('NCC03', 'Nhà Cung Cấp Highland', '0901122334', 'Lê Văn Cao', '0911122334', '56 Hai Bà Trưng, Hoàn Kiếm, Hà Nội'),
+    ('NCC04', 'Nhà Cung Cấp Starbucks', '0902233445', 'Phạm Thị Hoa', '0912233445', '78 Bà Triệu, Hai Bà Trưng, Hà Nội'),
+    ('NCC05', 'Nhà Cung Cấp Coffee House', '0903344556', 'Hoàng Minh', '0913344556', '90 Đinh Tiên Hoàng, Hoàn Kiếm, Hà Nội');
+
+	-- Chèn dữ liệu vào bảng giao dịch Kho
+	INSERT INTO GiaoDichKho (MaGiaoDich, MaSanPham, SoLuong, NgayNhapKho, NgayXuatKho, MaNhaCungCap)
+VALUES
+    ('GD01', 'M01', 100, '2024-06-19', NULL, 'NCC01'),
+    ('GD02', 'M02', 150, '2024-06-18', NULL, 'NCC02'),
+    ('GD03', 'M03', 120, '2024-06-17', NULL, 'NCC03'),
+    ('GD04', 'M04', 80, '2024-06-16', NULL, 'NCC04'),
+    ('GD05', 'M05', 200, '2024-06-15', NULL, 'NCC05');
+
+-- Kiểm tra dữ liệu trong các bảng đã tạo
+SELECT * FROM DanhMucSanPham;
+SELECT * FROM SanPham;
+SELECT * FROM KhachHang;
+SELECT * FROM DonHang;
+SELECT * FROM NhaCungCap;
+SELECT * FROM GiaoDichKho;
+
+USE BTLSQL;
+GO
+
+CREATE PROCEDURE themsanpham
+    @MaSanPham NVARCHAR(255),
+	@TenSanPham NVARCHAR(250),
+    @Gia DECIMAL(10, 2),
+    @MoTa NVARCHAR(50),
+	@MaDanhMuc NVARCHAR(50)
+ AS
+BEGIN
+    SET NOCOUNT ON;
+
+    -- Kiểm tra xem sản phẩm có tồn tại hay không trước khi chèn
+    IF NOT EXISTS (SELECT 1 FROM SanPham WHERE TenSanPham = @TenSanPham)
+    BEGIN
+        INSERT INTO SanPham (MaSanPham,TenSanPham, Gia ,MoTa, MaDanhMuc )
+        VALUES (@MaSanPham,@TenSanPham ,@Gia ,@MoTa,@MaDanhMuc);
+        SELECT 'Thêm sản phẩm thành công' AS [Result];
+    END
+    ELSE
+    BEGIN
+        SELECT 'Tên sản phẩm đã tồn tại. Không thể thêm sản phẩm.' AS [Result];
+    END
+END;
+GO
+
+USE BTLSQL;
+GO
+--thêm sản phẩm 
+EXEC themsanpham
+    @MaSanPham = 'M06',
+    @TenSanPham = N'Cà Phê Sữa Đá',
+    @Gia = 35000,
+    @MoTa = N'Cà phê sữa đá thơm ngon',
+    @MaDanhMuc = 'muc4';
+
+USE BTLSQL;
+GO
+
+CREATE PROCEDURE XoaSanPham
+    @MaSanPham NVARCHAR(50)
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    -- Kiểm tra sản phẩm có tồn tại trong bảng SanPham không
+    IF EXISTS (SELECT 1 FROM SanPham WHERE MaSanPham = @MaSanPham)
+    BEGIN
+        -- Xóa các bản ghi liên quan trong bảng DonHang trước (nếu cần)
+        DELETE FROM DonHang WHERE MaSanPham = @MaSanPham;
+
+        -- Xóa các bản ghi liên quan trong bảng GiaoDichKho trước (nếu cần)
+        DELETE FROM GiaoDichKho WHERE MaSanPham = @MaSanPham;
+
+        -- Xóa sản phẩm khỏi bảng SanPham
+        DELETE FROM SanPham WHERE MaSanPham = @MaSanPham;
+
+        SELECT 'Xóa sản phẩm thành công' AS [Result];
+    END
+    ELSE
+    BEGIN
+        SELECT 'Sản phẩm không tồn tại. Không thể xóa sản phẩm.' AS [Result];
+    END
+END;
+GO
+
+EXEC XoaSanPham @MaSanPham = 'M01';
+
+USE BTLSQL;
+GO
+
+CREATE PROCEDURE CapNhatSanPham
+    @MaSanPham NVARCHAR(50),
+    @TenSanPham NVARCHAR(255) = NULL,
+    @Gia DECIMAL(10, 2) = NULL,
+    @MoTa NVARCHAR(50) = NULL,
+    @MaDanhMuc NVARCHAR(50) = NULL
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    -- Kiểm tra sản phẩm có tồn tại trong bảng SanPham không
+    IF EXISTS (SELECT 1 FROM SanPham WHERE MaSanPham = @MaSanPham)
+    BEGIN
+        -- Cập nhật thông tin sản phẩm
+        UPDATE SanPham
+        SET 
+            TenSanPham = ISNULL(@TenSanPham, TenSanPham),
+            Gia = ISNULL(@Gia, Gia),
+            MoTa = ISNULL(@MoTa, MoTa),
+            MaDanhMuc = ISNULL(@MaDanhMuc, MaDanhMuc)
+        WHERE MaSanPham = @MaSanPham;
+
+        SELECT 'Cập nhật sản phẩm thành công' AS [Result];
+    END
+    ELSE
+    BEGIN
+        SELECT 'Sản phẩm không tồn tại. Không thể cập nhật sản phẩm.' AS [Result];
+    END
+END;
+GO
+
+EXEC CapNhatSanPham 
+    @MaSanPham = 'M01',
+    @TenSanPham = N'Cà Phê Đen Đá',
+    @Gia = 16000,
+    @MoTa = N'Cà Phê Đen Đá',
+    @MaDanhMuc = 'muc1';
+
+USE BTLSQL;
+GO
+
+CREATE PROCEDURE TimKiemSanPham
+    @MaSanPham NVARCHAR(50) = NULL,
+    @TenSanPham NVARCHAR(255) = NULL,
+    @MaDanhMuc NVARCHAR(50) = NULL
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    SELECT MaSanPham, TenSanPham, Gia, MoTa, MaDanhMuc
+    FROM SanPham
+    WHERE 
+        (@MaSanPham IS NULL OR MaSanPham = @MaSanPham) AND
+        (@TenSanPham IS NULL OR TenSanPham LIKE '%' + @TenSanPham + '%') AND
+        (@MaDanhMuc IS NULL OR MaDanhMuc = @MaDanhMuc);
+END;
+GO
+
+EXEC TimKiemSanPham @MaSanPham = 'M01';
+
+--Tính tổng doanh thu của ngày được chỉ định
+USE BTLSQL;
+GO
+
+CREATE PROCEDURE TinhDoanhThuNgay
+    @NgayBanHang DATE
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    -- Hàm Tính tổng doanh thu của ngày được chỉ định
+    SELECT SUM(TongTien) AS DoanhThu
+    FROM DonHang
+    WHERE NgayBanHang = @NgayBanHang;
+END;
+GO
+
+
+EXEC TinhDoanhThuNgay @NgayBanHang = '2024-06-21';
+
+USE BTLSQL;
+GO
+
+CREATE PROCEDURE SanPhamBanChayNhatoTrongThang
+    @Thang INT,
+    @Nam INT
+AS
+BEGIN
+    SET NOCOUNT ON; -- Tắt thông báo số bản ghi bị ảnh hưởng
+
+    -- Khai báo biến để lưu ngày bắt đầu và ngày kết thúc của tháng cần thống kê
+    DECLARE @StartDate DATE, @EndDate DATE;
+    SET @StartDate = DATEFROMPARTS(@Nam, @Thang, 1); -- Ngày đầu tiên của tháng
+    SET @EndDate = DATEADD(DAY, -1, DATEADD(MONTH, 1, @StartDate)); -- Ngày cuối cùng của tháng
+
+    -- Sử dụng CTE để tính tổng số lượng sản phẩm bán ra và lấy sản phẩm bán chạy nhất
+    WITH BanChayNhat AS (
+        SELECT TOP 1
+            DH.MaSanPham,
+            SUM(DH.SoLuong) AS TongSoLuongBan 
+        FROM DonHang DH
+        WHERE DH.NgayBanHang >= @StartDate AND DH.NgayBanHang <= @EndDate -- Điều kiện: Đơn hàng trong tháng
+        GROUP BY DH.MaSanPham 
+        ORDER BY SUM(DH.SoLuong) DESC -- Sắp xếp giảm dần theo tổng số lượng bán
+    )
+    -- Truy vấn để lấy thông tin chi tiết của sản phẩm bán chạy nhất
+    SELECT 
+        BC.MaSanPham, 
+        SP.TenSanPham, 
+        SP.Gia, 
+        SP.MoTa,
+        BC.TongSoLuongBan 
+    FROM BanChayNhat BC
+    INNER JOIN SanPham SP ON BC.MaSanPham = SP.MaSanPham; -- Liên kết với bảng SanPham để lấy thông tin chi tiết
+END;
+GO
+
+EXEC SanPhamBanChayNhatoTrongThang @Thang = 6, @Nam = 2024;
+
+
+
+USE BTLSQL;
+GO
+
+-- Tạo stored procedure ThongKeSoLuongHangTrongKho
+CREATE PROCEDURE ThongKeSoLuongHangTrongKho
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    SELECT 
+        SP.MaSanPham,
+        SP.TenSanPham,
+        ISNULL(SUM(GDK.SoLuong), 0) AS TongSoLuongTon
+    FROM 
+        SanPham SP
+    LEFT JOIN 
+        GiaoDichKho GDK ON SP.MaSanPham = GDK.MaSanPham
+    GROUP BY 
+        SP.MaSanPham, SP.TenSanPham
+    ORDER BY 
+        SP.TenSanPham;
+END;
+GO
+
+-- Tạo trigger để cập nhật số lượng tồn kho khi có thay đổi trong bảng GiaoDichKho
+CREATE TRIGGER trg_UpdateInventory
+ON GiaoDichKho
+AFTER INSERT, UPDATE, DELETE
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    -- Cập nhật số lượng tồn kho cho các sản phẩm bị ảnh hưởng bởi thay đổi
+    UPDATE SanPham
+    SET Gia = 
+        (SELECT ISNULL(SUM(GDK.SoLuong), 0)
+         FROM GiaoDichKho GDK
+         WHERE GDK.MaSanPham = SanPham.MaSanPham)
+    WHERE EXISTS 
+        (SELECT 1
+         FROM inserted i
+         WHERE i.MaSanPham = SanPham.MaSanPham)
+       OR EXISTS 
+        (SELECT 1
+         FROM deleted d
+         WHERE d.MaSanPham = SanPham.MaSanPham);
+END;
+GO
+
+-- Thực thi ThongKeSoLuongHangTrongKho để kiểm tra kết quả
+EXEC ThongKeSoLuongHangTrongKho;
+
+
+
+
