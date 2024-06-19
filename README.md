@@ -1,4 +1,4 @@
-# CHƯƠNG TRÌNH QUẢN LÝ KHO VÀ BÁN CỦA CỬA HÀNG CÀ PHÊ HIỀN ANH
+![image](https://github.com/lazy1st/B-i-t-p-L-N-CSDL/assets/166302644/1622c44a-48e5-43d7-9556-0693901a6ace)# CHƯƠNG TRÌNH QUẢN LÝ KHO VÀ BÁN CỦA CỬA HÀNG CÀ PHÊ HIỀN ANH
 ***
 **Tác Giả: Hoàng Đức Thuần**
 
@@ -108,89 +108,96 @@ Tạo sơ đồ thực thể liên kết giữa các bảng :<p>
 
 Thêm dữ liệu vào các bảng<p>
 1.	Dữ liệu thêm vào bảng SanPham<p>
-<code>-- Chèn dữ liệu vào bảng Danh mục sản phẩm
-INSERT INTO DanhMucSanPham (MaDanhMuc, TenDanhMuc, GhiChu)
-VALUES
-    '('muc1', 'Cà Phê Đen', ''),
-    ('muc2', 'Cà Phê Sữa', ''),
-    ('muc3', 'Cà Phê Phin', ''),
-    ('muc4', 'Cà Phê Capuchino', ''),
-    ('muc5', 'Cà Phê Trứng', '');
-
-
+######-- Chèn dữ liệu vào bảng Danh mục sản phẩm<p>
+INSERT INTO DanhMucSanPham (MaDanhMuc, TenDanhMuc, GhiChu)<p>
+VALUES<p>
+    '('muc1', 'Cà Phê Đen', ''),<p>
+    ('muc2', 'Cà Phê Sữa', ''),<p>
+    ('muc3', 'Cà Phê Phin', ''),<p>
+    ('muc4', 'Cà Phê Capuchino', ''),<p>
+    ('muc5', 'Cà Phê Trứng', '');<p>
+    
 2.Chèn dữ liệu vào bảng Sản phẩm
 
-<code>INSERT INTO SanPham (MaSanPham, TenSanPham, Gia, MoTa, MaDanhMuc)
-VALUES
-    ('M01', 'Cà Phê Đen',  15000,'Cà Phê Đen', 'muc1'),
-    ('M02', 'Cà Phê Sữa' , 20000, 'Cà Phê Sữa', 'muc1'),
-    ('M03', 'Cà Phê Phin' , 15000, 'Cà Phê Phin' , 'muc2'),
-    ('M04', 'Cà Phê Capuchino' , 20000,'Cà Phê Capuchino' , 'muc3'),
-    ('M05', 'Cà Phê Trứng' , 25000,'Cà Phê Trứng' , 'muc4');
+INSERT INTO SanPham (MaSanPham, TenSanPham, Gia, MoTa, MaDanhMuc)<p>
+VALUES<p>
+    ('M01', 'Cà Phê Đen',  15000,'Cà Phê Đen', 'muc1'),<p>
+    ('M02', 'Cà Phê Sữa' , 20000, 'Cà Phê Sữa', 'muc1'),<p>
+    ('M03', 'Cà Phê Phin' , 15000, 'Cà Phê Phin' , 'muc2'),<p>
+    ('M04', 'Cà Phê Capuchino' , 20000,'Cà Phê Capuchino' , 'muc3'),<p>
+    ('M05', 'Cà Phê Trứng' , 25000,'Cà Phê Trứng' , 'muc4');<p>
 
-3.Chèn dữ liệu vào bảng Khách hàng
+3.Chèn dữ liệu vào bảng Khách hàng<p>
 
-<code>INSERT INTO KhachHang (MaKhachHang, TenKhachHang, SoDienThoai, DiaChi, LoaiKhachHang)
-VALUES
-    ('KH001', 'Nguyen Van A', '0912345678', '123 Le Loi, TP.HCM', 'VIPP'),
-    ('KH002', 'Tran Thi B', '0987654321', '456 Hai Ba Trung, Ha Noi', 'VIP'),
-    ('KH003', 'Le Van C', '0909123456', '789 Nguyen Trai, Da Nang', 'New'),
-    ('KH004', 'Pham Thi D', '0934567890', '321 Tran Hung Dao, Can Tho', 'VIPP'),
-    ('KH005', 'Hoang Van E', '0976543210', '654 Le Duan, Hue', 'VIP');
-4.Chèn dữ liệu vào bảng Đơn Hàng
-<code>INSERT INTO DonHang (MaDonHang, MaKhachHang, NgayBanHang, TongTien, MaSanPham, SoLuong, Gia, GhiChu)
-VALUES
-    ('DH001', 'KH001', '2024-06-19', 30000, 'M01', 2, 15000, 'Uống lạnh'),
-    ('DH002', 'KH002', '2024-06-20', 40000, 'M02', 2, 20000, 'Uống nóng'),
-    ('DH003', 'KH003', '2024-06-21', 30000, 'M03', 2, 15000, 'Không đá'),
-    ('DH004', 'KH004', '2024-06-22', 40000, 'M04', 2, 20000, 'Mang đi'),
-    ('DH005', 'KH005', '2024-06-23', 50000, 'M05', 2, 25000, '');
+INSERT INTO KhachHang (MaKhachHang, TenKhachHang, SoDienThoai, DiaChi, LoaiKhachHang)<p>
+VALUES<p>
+    ('KH001', 'Nguyen Van A', '0912345678', '123 Le Loi, TP.HCM', 'VIPP'),<p>
+    ('KH002', 'Tran Thi B', '0987654321', '456 Hai Ba Trung, Ha Noi', 'VIP'),<p>
+    ('KH003', 'Le Van C', '0909123456', '789 Nguyen Trai, Da Nang', 'New'),<p>
+    ('KH004', 'Pham Thi D', '0934567890', '321 Tran Hung Dao, Can Tho', 'VIPP'),<p>
+    ('KH005', 'Hoang Van E', '0976543210', '654 Le Duan, Hue', 'VIP');<p>
+    
+4.Chèn dữ liệu vào bảng Đơn Hàng<p>
 
-5.Chèn dữ liệu vào bảng Nha Cung Cấp
-<code>INSERT INTO NhaCungCap (MaNhaCungCap, TenNhaCungCap, SoDienThoaiNhaCungCap, TenNguoiLienHe, SoDienThoaiNguoiLienHe, DiaChi)
-VALUES
-    ('NCC01', 'Nhà Cung Cấp Phúc Long', '0903456789', 'Nguyễn Văn Long', '0912345678', '12 Trần Hưng Đạo, Hoàn Kiếm, Hà Nội'),
-    ('NCC02', 'Nhà Cung Cấp Trung Nguyên', '0909876543', 'Trần Thị Trung', '0918765432', '34 Lý Thái Tổ, Hoàn Kiếm, Hà Nội'),
-    ('NCC03', 'Nhà Cung Cấp Highland', '0901122334', 'Lê Văn Cao', '0911122334', '56 Hai Bà Trưng, Hoàn Kiếm, Hà Nội'),
-    ('NCC04', 'Nhà Cung Cấp Starbucks', '0902233445', 'Phạm Thị Hoa', '0912233445', '78 Bà Triệu, Hai Bà Trưng, Hà Nội'),
-    ('NCC05', 'Nhà Cung Cấp Coffee House', '0903344556', 'Hoàng Minh', '0913344556', '90 Đinh Tiên Hoàng, Hoàn Kiếm, Hà Nội');
+INSERT INTO DonHang (MaDonHang, MaKhachHang, NgayBanHang, TongTien, MaSanPham, SoLuong, Gia, GhiChu)<p>
+VALUES<p>
+    ('DH001', 'KH001', '2024-06-19', 30000, 'M01', 2, 15000, 'Uống lạnh'),<p>
+    ('DH002', 'KH002', '2024-06-20', 40000, 'M02', 2, 20000, 'Uống nóng'),<p>
+    ('DH003', 'KH003', '2024-06-21', 30000, 'M03', 2, 15000, 'Không đá'),<p>
+    ('DH004', 'KH004', '2024-06-22', 40000, 'M04', 2, 20000, 'Mang đi'),<p>
+    ('DH005', 'KH005', '2024-06-23', 50000, 'M05', 2, 25000, '');<p>
 
-6.Chèn dữ liệu vào bảng giao dịch Kho
-	<code>INSERT INTO GiaoDichKho (MaGiaoDich, MaSanPham, SoLuong, NgayNhapKho, NgayXuatKho, MaNhaCungCap)
-VALUES
-    ('GD01', 'M01', 100, '2024-06-19', NULL, 'NCC01'),
-    ('GD02', 'M02', 150, '2024-06-18', NULL, 'NCC02'),
-    ('GD03', 'M03', 120, '2024-06-17', NULL, 'NCC03'),
-    ('GD04', 'M04', 80, '2024-06-16', NULL, 'NCC04'),
-    ('GD05', 'M05', 200, '2024-06-15', NULL, 'NCC05');
-7.Kiểm tra dữ liệu trong các bảng đã tạo
-<code>  SELECT * FROM DanhMucSanPham;
+5.Chèn dữ liệu vào bảng Nha Cung Cấp<p>
+
+INSERT INTO NhaCungCap (MaNhaCungCap, TenNhaCungCap, SoDienThoaiNhaCungCap, TenNguoiLienHe, SoDienThoaiNguoiLienHe, DiaChi)<p>
+VALUES<p>
+    ('NCC01', 'Nhà Cung Cấp Phúc Long', '0903456789', 'Nguyễn Văn Long', '0912345678', '12 Trần Hưng Đạo, Hoàn Kiếm, Hà Nội'),<p>
+    ('NCC02', 'Nhà Cung Cấp Trung Nguyên', '0909876543', 'Trần Thị Trung', '0918765432', '34 Lý Thái Tổ, Hoàn Kiếm, Hà Nội'),<p>
+    ('NCC03', 'Nhà Cung Cấp Highland', '0901122334', 'Lê Văn Cao', '0911122334', '56 Hai Bà Trưng, Hoàn Kiếm, Hà Nội'),<p>
+    ('NCC04', 'Nhà Cung Cấp Starbucks', '0902233445', 'Phạm Thị Hoa', '0912233445', '78 Bà Triệu, Hai Bà Trưng, Hà Nội'),<p>
+    ('NCC05', 'Nhà Cung Cấp Coffee House', '0903344556', 'Hoàng Minh', '0913344556', '90 Đinh Tiên Hoàng, Hoàn Kiếm, Hà Nội');<p>
+
+6.Chèn dữ liệu vào bảng giao dịch Kho<p>
+	INSERT INTO GiaoDichKho (MaGiaoDich, MaSanPham, SoLuong, NgayNhapKho, NgayXuatKho, MaNhaCungCap)<p>
+VALUES<p>
+    ('GD01', 'M01', 100, '2024-06-19', NULL, 'NCC01'),<p>
+    ('GD02', 'M02', 150, '2024-06-18', NULL, 'NCC02'),<p>
+    ('GD03', 'M03', 120, '2024-06-17', NULL, 'NCC03'),<p>
+    ('GD04', 'M04', 80, '2024-06-16', NULL, 'NCC04'),<p>
+    ('GD05', 'M05', 200, '2024-06-15', NULL, 'NCC05');<p>
+7.Kiểm tra dữ liệu trong các bảng đã tạo<p>
+  SELECT * FROM DanhMucSanPham;<p>
 ![image](https://github.com/lazy1st/B-i-t-p-L-N-CSDL/assets/166302644/b94f0c9b-ba04-4a38-987a-e42d530b1f09)
 
- <code> SELECT * FROM SanPham;
- 
- <code> SELECT * FROM KhachHang;
- 
- <code> SELECT * FROM DonHang;
- 
- <code> SELECT * FROM NhaCungCap;
- 
- <code> SELECT * FROM GiaoDichKho;
+ SELECT * FROM SanPham;<p>
+ ![image](https://github.com/lazy1st/B-i-t-p-L-N-CSDL/assets/166302644/3fbdfabf-916f-44cf-a992-ee3a3144c3ba)
+
+ SELECT * FROM KhachHang;<p>
+ ![image](https://github.com/lazy1st/B-i-t-p-L-N-CSDL/assets/166302644/3fec97b7-cea5-4b36-8364-cf10fab06a95)
+
+ SELECT * FROM DonHang;<p>
+ ![image](https://github.com/lazy1st/B-i-t-p-L-N-CSDL/assets/166302644/98f2b2dd-d457-4e05-9ca4-d3c90f50ed5c)
+
+ SELECT * FROM NhaCungCap;<p>
+ ![image](https://github.com/lazy1st/B-i-t-p-L-N-CSDL/assets/166302644/27b9f70c-5a22-4326-b253-53e333318d9f)
+
+ SELECT * FROM GiaoDichKho;<p>
+![image](https://github.com/lazy1st/B-i-t-p-L-N-CSDL/assets/166302644/a56af0ac-3319-45c5-b408-a42f0db97d76)
  
 XÂY DỰNG CÁC THỦ TỤC THEO CÁC CHỨC NĂNG MONG MUỐN
-Yêu cầu
-1.	Quản lý việc bán hàng
-•	Thêm, sửa, xoá sản phẩm
-•	Tìm kiếm sản phẩm, lọc sản phẩm theo các tiêu chí của người quản lý hoặc của khách hàng
-•	Xem thông tin chỉ tiết mỗi sản phẩm
-•	Doanh thu của một ngày, một tháng,...
-•	Số lượng sản phẩm bán chạy nhất.
-2.	Quản lý kho
-•	Thống kê số lượng hàng trong kho
-•	Báo cáo tình trạng hàng trong kho, số hàng tồn, số hàng đã hết chưa nhập về.
-Xây dựng
+Yêu cầu<p>
+1.	Quản lý việc bán hàng<p>
+  •	Thêm, sửa, xoá sản phẩm<p>
+  •	Tìm kiếm sản phẩm, lọc sản phẩm theo các tiêu chí của người quản lý hoặc của khách hàng<p>
+  •	Xem thông tin chỉ tiết mỗi sản phẩm<p>
+  •	Doanh thu của một ngày, một tháng,...<p>
+  •	Số lượng sản phẩm bán chạy nhất.<p>
+2.	Quản lý kho<p>
+  •	Thống kê số lượng hàng trong kho<p>
+  •	Báo cáo tình trạng hàng trong kho, số hàng tồn, số hàng đã hết chưa nhập về.<p>
+Xây dựng<p>
  
--- thêm sản phẩm
+######-- thêm sản phẩm
 CREATE PROCEDURE themsanpham
     @MaSanPham NVARCHAR(255),
 	@TenSanPham NVARCHAR(250),
@@ -201,7 +208,7 @@ CREATE PROCEDURE themsanpham
 BEGIN
     SET NOCOUNT ON;
 
-    -- Kiểm tra xem sản phẩm có tồn tại hay không trước khi chèn
+    ######-- Kiểm tra xem sản phẩm có tồn tại hay không trước khi chèn
     IF NOT EXISTS (SELECT 1 FROM SanPham WHERE TenSanPham = @TenSanPham)
     BEGIN
         INSERT INTO SanPham (MaSanPham,TenSanPham, Gia ,MoTa, MaDanhMuc )
@@ -214,7 +221,8 @@ BEGIN
     END
 END;
 GO
---thêm sản phẩm 
+
+######--thêm sản phẩm <p>
 EXEC themsanpham
     @MaSanPham = 'M06',
     @TenSanPham = N'Cà Phê Sữa Đá',
@@ -223,25 +231,22 @@ EXEC themsanpham
     @MaDanhMuc = 'muc4';
 
 
-
- 
-
 CREATE PROCEDURE XoaSanPham
     @MaSanPham NVARCHAR(50)
 AS
 BEGIN
     SET NOCOUNT ON;
 
-    -- Kiểm tra sản phẩm có tồn tại trong bảng SanPham không
+   ######-- Kiểm tra sản phẩm có tồn tại trong bảng SanPham không
     IF EXISTS (SELECT 1 FROM SanPham WHERE MaSanPham = @MaSanPham)
     BEGIN
-        -- Xóa các bản ghi liên quan trong bảng DonHang trước (nếu cần)
+        ######-- Xóa các bản ghi liên quan trong bảng DonHang trước (nếu cần)
         DELETE FROM DonHang WHERE MaSanPham = @MaSanPham;
 
-        -- Xóa các bản ghi liên quan trong bảng GiaoDichKho trước (nếu cần)
+       ###### -- Xóa các bản ghi liên quan trong bảng GiaoDichKho trước (nếu cần)
         DELETE FROM GiaoDichKho WHERE MaSanPham = @MaSanPham;
 
-        -- Xóa sản phẩm khỏi bảng SanPham
+       ###### -- Xóa sản phẩm khỏi bảng SanPham
         DELETE FROM SanPham WHERE MaSanPham = @MaSanPham;
 
         SELECT 'Xóa sản phẩm thành công' AS [Result];
@@ -253,7 +258,7 @@ BEGIN
 END;
 GO
 
-EXEC XoaSanPham @MaSanPham = 'M01';
+EXEC XoaSanPham @MaSanPham = 'M01';<p>
  
 CREATE PROCEDURE CapNhatSanPham
     @MaSanPham NVARCHAR(50),
@@ -265,10 +270,10 @@ AS
 BEGIN
     SET NOCOUNT ON;
 
-    -- Kiểm tra sản phẩm có tồn tại trong bảng SanPham không
+   ######-- Kiểm tra sản phẩm có tồn tại trong bảng SanPham không
     IF EXISTS (SELECT 1 FROM SanPham WHERE MaSanPham = @MaSanPham)
     BEGIN
-        -- Cập nhật thông tin sản phẩm
+       ###### -- Cập nhật thông tin sản phẩm
         UPDATE SanPham
         SET 
             TenSanPham = ISNULL(@TenSanPham, TenSanPham),
@@ -284,8 +289,7 @@ BEGIN
         SELECT 'Sản phẩm không tồn tại. Không thể cập nhật sản phẩm.' AS [Result];
     END
 END;
-GO
-
+GO<p>
 
 EXEC CapNhatSanPham 
     @MaSanPham = 'M01',
@@ -293,7 +297,7 @@ EXEC CapNhatSanPham
     @Gia = 16000,
     @MoTa = N'Cà Phê Đen Đá',
     @MaDanhMuc = 'muc1';
--- tìm kiếm sản phẩm 
+######-- tìm kiếm sản phẩm 
  
 CREATE PROCEDURE TimKiemSanPham
     @MaSanPham NVARCHAR(50) = NULL,
@@ -310,10 +314,10 @@ BEGIN
         (@TenSanPham IS NULL OR TenSanPham LIKE '%' + @TenSanPham + '%') AND
         (@MaDanhMuc IS NULL OR MaDanhMuc = @MaDanhMuc);
 END;
-GO
+GO<p>
 EXEC TimKiemSanPham @MaSanPham = 'M01';
  
-Tính tổng doanh thu của ngày được chỉ định
+######--Tính tổng doanh thu của ngày được chỉ định
 USE BTLSQL;
 GO
 
@@ -323,7 +327,7 @@ AS
 BEGIN
     SET NOCOUNT ON;
 
-    -- Hàm Tính tổng doanh thu của ngày được chỉ định
+    ######-- Hàm Tính tổng doanh thu của ngày được chỉ định
     SELECT SUM(TongTien) AS DoanhThu
     FROM DonHang
     WHERE NgayBanHang = @NgayBanHang;
@@ -331,21 +335,21 @@ END;
 GO 
 EXEC TinhDoanhThuNgay @NgayBanHang = '2024-06-21'; 
  
--- Sản phẩm bán chạy nhất tháng
+######-- Sản phẩm bán chạy nhất tháng
 
 CREATE PROCEDURE SanPhamBanChayNhatoTrongThang
     @Thang INT,
     @Nam INT
 AS
 BEGIN
-    SET NOCOUNT ON; -- Tắt thông báo số bản ghi bị ảnh hưởng
+    SET NOCOUNT ON; ######-- Tắt thông báo số bản ghi bị ảnh hưởng
 
-    -- Khai báo biến để lưu ngày bắt đầu và ngày kết thúc của tháng cần thống kê
+   ######-- Khai báo biến để lưu ngày bắt đầu và ngày kết thúc của tháng cần thống kê
     DECLARE @StartDate DATE, @EndDate DATE;
-    SET @StartDate = DATEFROMPARTS(@Nam, @Thang, 1); -- Ngày đầu tiên của tháng
-    SET @EndDate = DATEADD(DAY, -1, DATEADD(MONTH, 1, @StartDate)); -- Ngày cuối cùng của tháng
+    SET @StartDate = DATEFROMPARTS(@Nam, @Thang, 1);###### -- Ngày đầu tiên của tháng
+    SET @EndDate = DATEADD(DAY, -1, DATEADD(MONTH, 1, @StartDate));###### -- Ngày cuối cùng của tháng
 
-    -- Sử dụng CTE để tính tổng số lượng sản phẩm bán ra và lấy sản phẩm bán chạy nhất
+   ######-- Sử dụng CTE để tính tổng số lượng sản phẩm bán ra và lấy sản phẩm bán chạy nhất
     WITH BanChayNhat AS (
         SELECT TOP 1
             DH.MaSanPham,
@@ -355,7 +359,7 @@ BEGIN
         GROUP BY DH.MaSanPham 
         ORDER BY SUM(DH.SoLuong) DESC -- Sắp xếp giảm dần theo tổng số lượng bán
     )
-    -- Truy vấn để lấy thông tin chi tiết của sản phẩm bán chạy nhất
+   ######-- Truy vấn để lấy thông tin chi tiết của sản phẩm bán chạy nhất
     SELECT 
         BC.MaSanPham, 
         SP.TenSanPham, 
@@ -363,11 +367,11 @@ BEGIN
         SP.MoTa,
         BC.TongSoLuongBan 
     FROM BanChayNhat BC
-    INNER JOIN SanPham SP ON BC.MaSanPham = SP.MaSanPham; -- Liên kết với bảng SanPham để lấy thông tin chi tiết
+    INNER JOIN SanPham SP ON BC.MaSanPham = SP.MaSanPham;###### -- Liên kết với bảng SanPham để lấy thông tin chi tiết
 END;
 GO 
  
-- Tạo stored procedure ThongKeSoLuongHangTrongKho
+######- Tạo stored procedure ThongKeSoLuongHangTrongKho
 CREATE PROCEDURE ThongKeSoLuongHangTrongKho
 AS
 BEGIN
@@ -388,7 +392,7 @@ BEGIN
 END;
 GO
 
--- Tạo trigger để cập nhật số lượng tồn kho khi có thay đổi trong bảng GiaoDichKho
+######-- Tạo trigger để cập nhật số lượng tồn kho khi có thay đổi trong bảng GiaoDichKho
 CREATE TRIGGER trg_UpdateInventory
 ON GiaoDichKho
 AFTER INSERT, UPDATE, DELETE
@@ -398,7 +402,7 @@ BEGIN
 
     DECLARE @MaSanPham INT;
 
-    -- Con trỏ để xử lý các bản ghi bị ảnh hưởng
+   ######-- Con trỏ để xử lý các bản ghi bị ảnh hưởng
     DECLARE cur CURSOR FOR
     SELECT DISTINCT MaSanPham FROM (
         SELECT MaSanPham FROM inserted
@@ -412,7 +416,7 @@ BEGIN
 
     WHILE @@FETCH_STATUS = 0
     BEGIN
-        -- Cập nhật số lượng tồn kho cho sản phẩm hiện tại
+      ######  -- Cập nhật số lượng tồn kho cho sản phẩm hiện tại
         UPDATE SanPham
         SET TongSoLuongTon = 
             (SELECT ISNULL(SUM(GDK.SoLuong), 0)
