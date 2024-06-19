@@ -326,7 +326,6 @@ GO
 EXEC SanPhamBanChayNhatoTrongThang @Thang = 6, @Nam = 2024;
 
 
-
 USE BTLSQL;
 GO
 
@@ -359,26 +358,39 @@ AS
 BEGIN
     SET NOCOUNT ON;
 
-    -- Cập nhật số lượng tồn kho cho các sản phẩm bị ảnh hưởng bởi thay đổi
-    UPDATE SanPham
-    SET Gia = 
-        (SELECT ISNULL(SUM(GDK.SoLuong), 0)
-         FROM GiaoDichKho GDK
-         WHERE GDK.MaSanPham = SanPham.MaSanPham)
-    WHERE EXISTS 
-        (SELECT 1
-         FROM inserted i
-         WHERE i.MaSanPham = SanPham.MaSanPham)
-       OR EXISTS 
-        (SELECT 1
-         FROM deleted d
-         WHERE d.MaSanPham = SanPham.MaSanPham);
+    DECLARE @MaSanPham INT;
+
+    -- Con trỏ để xử lý các bản ghi bị ảnh hưởng
+    DECLARE cur CURSOR FOR
+    SELECT DISTINCT MaSanPham FROM (
+        SELECT MaSanPham FROM inserted
+        UNION
+        SELECT MaSanPham FROM deleted
+    ) AS affected;
+
+    OPEN cur;
+
+    FETCH NEXT FROM cur INTO @MaSanPham;
+
+    WHILE @@FETCH_STATUS = 0
+    BEGIN
+        -- Cập nhật số lượng tồn kho cho sản phẩm hiện tại
+        UPDATE SanPham
+        SET TongSoLuongTon = 
+            (SELECT ISNULL(SUM(GDK.SoLuong), 0)
+             FROM GiaoDichKho GDK
+             WHERE GDK.MaSanPham = @MaSanPham)
+        WHERE MaSanPham = @MaSanPham;
+
+        FETCH NEXT FROM cur INTO @MaSanPham;
+    END;
+
+    CLOSE cur;
+    DEALLOCATE cur;
 END;
 GO
 
--- Thực thi ThongKeSoLuongHangTrongKho để kiểm tra kết quả
+-- Thực thi stored procedure ThongKeSoLuongHangTrongKho để kiểm tra kết quả
 EXEC ThongKeSoLuongHangTrongKho;
-
-
-
+GO
 
